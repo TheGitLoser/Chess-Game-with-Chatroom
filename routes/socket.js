@@ -34,7 +34,7 @@ var join = function(gameID) {
   var result = game.addPlayer(sess);
   if (!result) {
     console.log('ERROR: Failed to Add Player', debugInfo);
-    this.emit('error', {message: "Unable to join game"});
+    this.emit('error', {message: "Unable to join game, room full"});
     return;
   }
 
@@ -160,9 +160,20 @@ var disconnect = function() {
     return;
   }
 
+  // Remove player from room
+  DB.removePlayer(sess.gameID, sess.playerName);
+
   console.log(sess.playerName+' left '+sess.gameID);
   console.log('Socket '+this.id+' disconnected');
 };
+
+// Received new chatroom message
+var newChatroomMessage = function(msg){
+  msg = JSON.parse(msg);
+  IO.sockets.to(msg.roomId).emit('chatroom new message received', msg.name+": "+msg.message);
+  console.log(`msg rec: ${msg.message}`);
+
+}
 
 /**
  * Attach route/event handlers for socket.io
@@ -179,6 +190,8 @@ exports.attach = function(io, db) {
     socket.on('move', move);
     socket.on('forfeit', forfeit);
     socket.on('disconnect', disconnect);
+
+    socket.on('chatroom new message send', newChatroomMessage)    
 
     console.log('Socket '+socket.id+' connected');
   });

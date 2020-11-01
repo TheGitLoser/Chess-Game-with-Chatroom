@@ -33,17 +33,30 @@ block content
                   | Black
           .form-group
             label(for="playerName") Name
-            input#playerName.form-control(type="text", name="player-name", placeholder="Player 1")
+            input#playerName.form-control(type="text", name="player-name", value="Player 1")
+          .form-group
+            label(for="roomName") Room Name
+            input#playerName.form-control(type="text", name="roomName", value="Room Name")
           button.btn.btn-primary(type="submit") Start Game
       .col-sm-6
         h2 Join an Existing Game
         form#joinForm(action="/join", method="POST", role="form")
+
+          script
+            var roomInfo = !{JSON.stringify(roomInfo)};
+
           .form-group
-            label(for="gameID") Game ID
-            input#gameID.form-control(type="text", name="game-id")
+            label Room name
+            select#room(name='game-id').form-control
+              if roomInfo
+              each value, roomId in roomInfo
+                option(value='#{roomId}') #{value.name}
+              else
+                option(value='')  No room available 
+
           .form-group
             label(for="playerName") Name
-            input#playerName.form-control(type="text", name="player-name", placeholder="Player 2")
+            input#playerName.form-control(type="text", name="player-name", value="Player 1")
           button.btn.btn-primary(type="submit") Join Game
 
   script(src="/js/jquery.min.js")

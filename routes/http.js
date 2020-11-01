@@ -68,9 +68,11 @@ var validateJoinGame = function(req) {
  * Render "Home" Page
  */
 var home = function(req, res) {
+  console.log(DB.getRoomInfo());  // for debug only
 
-  // Welcome
-  res.render('home');
+  availableRoomInfo = DB.getAvilableRoomInfo();
+  console.log(availableRoomInfo);
+  res.render('home',{roomInfo:availableRoomInfo});
 };
 
 /**
@@ -82,8 +84,11 @@ var game = function(req, res) {
   var validData = validateGame(req);
   if (!validData) { res.redirect('/'); return; }
 
+  // Get room name
+  var roomName = DB.getRoomName(validData.gameID);
+
   // Render the game page
-  res.render('game', validData);
+  res.render('game', {validData: validData, roomName: roomName});
 };
 
 /**
@@ -102,6 +107,9 @@ var startGame = function(req, res) {
 
     // Create new game
     var gameID = DB.add(validData);
+
+    // custom - save room info
+    DB.createNewRoom(gameID, req.body.roomName, validData.playerName);
 
     // Save data to session
     req.session.gameID      = gameID;
@@ -129,7 +137,21 @@ var joinGame = function(req, res) {
 
     // Find specified game
     var game = DB.find(validData.gameID);
-    if (!game) { res.redirect('/'); return;}
+    if (!game) { 
+      res.redirect('/'); 
+      return;
+    }
+
+    // Check player's name, must be unique
+    temp = DB.checkUniqueParticipantName(validData.gameID, validData.playerName);
+    if(!temp){
+      // no this room id
+      res.redirect('/');
+      return;
+    }
+    validData.playerName = temp;
+    // join to roomInfo
+    DB.joinRoom(validData.gameID, validData.playerName);
 
     // Determine which player (color) to join as
     var joinColor = (game.players[0].joined) ? game.players[1].color : game.players[0].color;

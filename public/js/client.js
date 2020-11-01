@@ -20,7 +20,6 @@ var Client = (function(window) {
   var pawnPromotionPrompt = null;
   var forfeitPrompt       = null;
 
-
   /**
    * Initialize the UI
    */
@@ -58,6 +57,25 @@ var Client = (function(window) {
 
     // Join game
     socket.emit('join', gameID);
+
+    socket.on('chatroom new message received', function (msg) {
+      console.log(msg);
+      $('#messageBody').append($('<div class="row message-item">').text(`${msg}`));
+    });
+  
+  
+    $('#messageForm').submit(function () {
+        message = $('#inputMessage').val();
+        if (message){
+            msgSend = JSON.stringify({roomId:config.gameID, name: config.playerName, message:message});
+            console.log(msgSend);
+            socket.emit('chatroom new message send', msgSend);  // send
+            $('#inputMessage').val("");
+        }
+        
+        return false;
+    });
+
   };
 
   /**
