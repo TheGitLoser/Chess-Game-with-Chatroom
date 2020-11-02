@@ -32,11 +32,11 @@ block content
                   input(type="radio", name="player-color", value="black")
                   | Black
           .form-group
-            label(for="playerName") Name
-            input#playerName.form-control(type="text", name="player-name", value="Player 1")
+            label(for="playerName") Player Name
+            input#playerName.form-control(type="text", name="player-name", value="Player 1", required=)
           .form-group
             label(for="roomName") Room Name
-            input#playerName.form-control(type="text", name="roomName", value="Room Name")
+            input#playerName.form-control(type="text", name="roomName", value="Room Name", required=)
           button.btn.btn-primary(type="submit") Start Game
       .col-sm-6
         h2 Join an Existing Game
@@ -55,8 +55,8 @@ block content
                 option(value='')  No room available 
 
           .form-group
-            label(for="playerName") Name
-            input#playerName.form-control(type="text", name="player-name", value="Player 1")
+            label(for="playerName") Player Name
+            input#playerName.form-control(type="text", name="player-name", value="Player 1", required=)
           button.btn.btn-primary(type="submit") Join Game
 
   script(src="/js/jquery.min.js")
