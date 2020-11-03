@@ -31,7 +31,7 @@ var join = function(gameID) {
   }
 
   // Add user to game
-  var result = game.addPlayer(sess);
+  var result = game.addPlayer(sess, DB.getRoomParticipantNo(gameID));
   if (!result) {
     console.log('ERROR: Failed to Add Player', debugInfo);
     this.emit('error', {message: "Unable to join game, room full"});

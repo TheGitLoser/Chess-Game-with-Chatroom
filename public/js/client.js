@@ -20,6 +20,8 @@ var Client = (function(window) {
   var pawnPromotionPrompt = null;
   var forfeitPrompt       = null;
 
+  var userType = false;
+
   /**
    * Initialize the UI
    */
@@ -27,6 +29,7 @@ var Client = (function(window) {
     gameID      = config.gameID;
     playerColor = config.playerColor;
     playerName  = config.playerName;
+    userType = config.userType;
 
     container   = $('#game');
     messages    = $('#messages');
@@ -47,7 +50,9 @@ var Client = (function(window) {
     assignSquares();
 
     // Attach event handlers
-    attachDOMEventHandlers();
+    if (userType = "Player"){
+      attachDOMEventHandlers();
+    }
     attachSocketEventHandlers();
 
     // Initialize modal popup windows

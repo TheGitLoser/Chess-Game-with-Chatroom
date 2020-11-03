@@ -11,14 +11,14 @@ var validateGame = function(req) {
   if (!req.session.playerColor) { return null; }
   if (!req.session.playerName)  { return null; }
   if (!req.params.id)           { return null; }
-
   // These must match
   if (req.session.gameID !== req.params.id) { return null; }
 
   return {
     gameID      : req.session.gameID,
     playerColor : req.session.playerColor,
-    playerName  : req.session.playerName
+    playerName  : req.session.playerName,
+    userType    : req.session.userType
   };
 };
 
@@ -68,9 +68,10 @@ var validateJoinGame = function(req) {
  * Render "Home" Page
  */
 var home = function(req, res) {
-  console.log(DB.getRoomInfo());  // for debug only
+ // console.log(DB.getRoomInfo());  // for debug only
 
-  availableRoomInfo = DB.getAvilableRoomInfo();
+  // availableRoomInfo = DB.getAvilableRoomInfo();  // for 2 ppk in 1 room
+  availableRoomInfo = DB.getRoomInfo();   // for viewer
   console.log(availableRoomInfo);
   res.render('home',{roomInfo:availableRoomInfo});
 };
@@ -115,6 +116,7 @@ var startGame = function(req, res) {
     req.session.gameID      = gameID;
     req.session.playerColor = validData.playerColor;
     req.session.playerName  = validData.playerName;
+    req.session.userType    = "player";
 
     // Redirect to game page
     res.redirect('/game/'+gameID);
@@ -151,7 +153,7 @@ var joinGame = function(req, res) {
     }
     validData.playerName = temp;
     // join to roomInfo
-    DB.joinRoom(validData.gameID, validData.playerName);
+    req.session.userType = DB.joinRoom(validData.gameID, validData.playerName);
 
     // Determine which player (color) to join as
     var joinColor = (game.players[0].joined) ? game.players[1].color : game.players[0].color;
