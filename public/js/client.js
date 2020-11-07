@@ -29,7 +29,8 @@ var Client = (function(window) {
     gameID      = config.gameID;
     playerColor = config.playerColor;
     playerName  = config.playerName;
-    userType = config.userType;
+    userType    = config.userType;
+    console.log(userType);
 
     container   = $('#game');
     messages    = $('#messages');
@@ -50,7 +51,7 @@ var Client = (function(window) {
     assignSquares();
 
     // Attach event handlers
-    if (userType = "Player"){
+    if (userType == "player"){
       attachDOMEventHandlers();
     }
     attachSocketEventHandlers();
@@ -120,7 +121,6 @@ var Client = (function(window) {
    * Attach DOM event handlers
    */
   var attachDOMEventHandlers = function() {
-
     // Highlight valid moves for white pieces
     if (playerColor === 'white') {
       container.on('click', '.white.pawn', function(ev) {
