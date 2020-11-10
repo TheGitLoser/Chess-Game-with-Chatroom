@@ -186,13 +186,15 @@ block content
               .modal-footer
                 button#cancel-forfeit.btn.btn-default Cancel
                 button#confirm-forfeit.btn.btn-primary Forfeit
-      .col-sm-4   
-        #messageBody
-          div Chatroom:
-        form.form-inline#messageForm
-          .form-group
-            input.form-control#inputMessage(type='text', placeholder='type your message...', autocomplete='off')
-          button.btn.btn-default(type='submit') Send
+      .col-sm-4
+        #big-container   
+          div Chatroom 
+          #chat-container
+            #messageBody
+          form.form-inline#messageForm
+            .form-group
+              input.form-control#inputMessage(type='text', placeholder='type your message...', autocomplete='off')
+            button.btn.btn-default#submitMessage(type='submit') Send
 
 
 

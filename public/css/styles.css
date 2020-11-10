@@ -123,3 +123,41 @@ table { border-collapse: collapse; }
 .white.bishop:before  { content: "\2657"; }
 .white.queen:before   { content: "\2655"; }
 .white.king:before    { content: "\2654"; }
+
+#big-container {
+  background-color: black;
+  padding: 10px;
+  width: 260px;
+  background: lightgray;
+  border-radius: 20px;
+  font-family: 'Poppins', 'Font Awesome 5 Pro', sans-serif;
+  font-weight: 600;
+  text-align: center;
+}
+
+#chat-container {
+  text-align: left;
+  margin-bottom: 5px;
+  width: 240px;
+  height: 550px;
+  overflow: auto;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column-reverse;
+  border-radius: 20px;
+  background-color: white;
+
+  
+}
+
+.message-item {
+  margin-left: 1em;
+}
+
+#inputMessage {
+  border-radius: 20px;
+}
+
+#submitMessage  {
+  border-radius: 20px;
+}
