@@ -4,18 +4,7 @@ block content
 
   #banner.jumbotron
     .container
-      h1 Socket.IO Chess
-      p.
-        A real-time multi-player chess app using
-        <a href="http://nodejs.org">Node.js</a>,
-        <a href="http://expressjs.com">Express</a>, and of course
-        <a href="http://socket.io">Socket.IO</a>.
-
-      p.
-        <a class="btn btn-primary" href="https://github.com/thebinarypenguin/socket.io-chess">
-        View project on GitHub
-        </a>
-
+      h2  Chess Game with Chat Room
   .container
     .row
       .col-sm-6
@@ -33,10 +22,10 @@ block content
                   | Black
           .form-group
             label(for="playerName") Player Name
-            input#playerName.form-control(type="text", name="player-name", value="Player 1", required=)
+            input#playerName.form-control(type="text", name="player-name", placeholder="Player Name", required=)
           .form-group
             label(for="roomName") Room Name
-            input#playerName.form-control(type="text", name="roomName", value="Room Name", required=)
+            input#playerName.form-control(type="text", name="roomName", placeholder="Room Name", required=)
           button.btn.btn-primary(type="submit") Start Game
       .col-sm-6
         h2 Join an Existing Game
@@ -56,7 +45,7 @@ block content
 
           .form-group
             label(for="playerName") Player Name
-            input#playerName.form-control(type="text", name="player-name", value="Player 1", required=)
+            input#playerName.form-control(type="text", name="player-name", placeholder="Player Name", required=)
           button.btn.btn-primary(type="submit") Join Game
 
   script(src="/js/jquery.min.js")
