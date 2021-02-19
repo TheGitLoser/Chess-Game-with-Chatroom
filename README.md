@@ -11,12 +11,12 @@ Client-side
 
 1. Download
 ```
-git clone https://github.com/TheGitLoser/COMP-networking-project.git
+git clone https://github.com/TheGitLoser/Chess-Game-with-Chatroom.git
 ```
 
 2. Install
 ```
-cd COMP-networking-project
+cd Chess-Game-with-Chatroom
 npm install
 ```
 
