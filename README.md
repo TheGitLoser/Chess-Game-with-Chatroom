@@ -1,4 +1,4 @@
-Project of COMP5311 Internet Infrastructure and Protocols, The Hong Kong Polytechnic University
+![](UI%20Screenshot.png)
 
 # Tools used
 Server-side
