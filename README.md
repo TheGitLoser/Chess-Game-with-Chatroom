@@ -11,7 +11,7 @@ Client-side
 
 1. Download
 ```
-git clone https://github.com/TheGitLoser/Chess-Game-with-Chatroom.git
+git clone https://github.com/TheHKCoder/Chess-Game-with-Chatroom.git
 ```
 
 2. Install
